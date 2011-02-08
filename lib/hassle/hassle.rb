@@ -45,7 +45,7 @@ class Hassle::Compiler
   end
 
   def compile_location(*subdirs)
-    File.join(Dir.pwd, "tmp", "hassle", subdirs)
+    File.join(Dir.pwd, "tmp", subdirs)
   end
 
   def normalize

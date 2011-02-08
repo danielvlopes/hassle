@@ -8,13 +8,13 @@ describe Hassle::Compiler do
 
   it "dumps css into separate folders" do
     @hassle.css_location("./public/stylesheets/sass").should ==
-      File.join(Dir.pwd, "tmp", "hassle", "stylesheets")
+      File.join(Dir.pwd, "tmp", "stylesheets")
 
     @hassle.css_location("./public/css/compiled").should ==
-      File.join(Dir.pwd, "tmp", "hassle", "css", "compiled")
+      File.join(Dir.pwd, "tmp", "css", "compiled")
 
     @hassle.css_location("./public/styles/posts/sass").should ==
-      File.join(Dir.pwd, "tmp", "hassle", "styles", "posts")
+      File.join(Dir.pwd, "tmp", "styles", "posts")
   end
 
   describe "compiling sass" do
@@ -24,7 +24,6 @@ describe Hassle::Compiler do
 
     it "moves css into tmp directory with default settings" do
       sass = write_sass(File.join(@default_location, "sass"))
-
       @hassle.compile
 
       sass.should be_compiled
@@ -34,7 +33,6 @@ describe Hassle::Compiler do
     it "should not create sass cache" do
       write_sass(File.join(@default_location, "sass"))
       Sass::Plugin.options[:cache] = true
-
       @hassle.compile
 
       File.exists?(".sass-cache").should be_false
@@ -43,7 +41,6 @@ describe Hassle::Compiler do
     it "should compile sass even if disabled with never_update" do
       sass = write_sass(File.join(@default_location, "sass"))
       Sass::Plugin.options[:never_update] = true
-
       @hassle.compile
 
       sass.should be_compiled
